@@ -80,7 +80,6 @@ class Mixup(object):
             mix_img = train_batch[i][0] * lam + train_batch[rand_index[i]][0] * (1-lam)
             mix_label = lam * np.eye(100)[train_batch[i][1]] + (1- lam) * lam * np.eye(100)[train_batch[rand_index[i]][1]]            
             img_batch_mixup.append(mix_img)
-            print(type(mix_img,mix_label))
             labels.append(torch.from_numpy(mix_label))
         return torch.stack(img_batch_mixup,0),torch.stack(labels,0)
 
