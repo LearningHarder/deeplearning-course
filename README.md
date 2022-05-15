@@ -3,8 +3,8 @@
 ## Table of Contents
 
 - [AlexNet](#AlexNet)
-- [Faster R-CNN](#Faster R-CNN)
-- [YOLO V3](#YOLO V3)
+- [Faster R-CNN]
+- [YOLO V3]
 - [template](#template)
 
 
