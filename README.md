@@ -3,8 +3,8 @@
 ## Table of Contents
 
 - [AlexNet](#AlexNet)
-- [Faster R-CNN](#Faster R-CNN)
-- [YOLO V3](#YOLO V3)
+- [Faster R-CNN]
+- [YOLO V3]
 - [template](#template)
 
 
@@ -29,6 +29,7 @@ pip3 install -r requirements.txt
 ```
 **2.修改部分文件**
 将val.py，data/voc.yaml，和untils/loggers/__init__.py更新为此仓库的对应文件，将此仓库的plots.py文件拷贝到对应位置
+
 **3.训练模型**
 ```
 python train.py --data data/voc.yaml --epochs 80 --batch-size 16 --img 416
