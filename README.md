@@ -9,6 +9,11 @@
 
 
 ## AlexNet
+任务一使用AlexNet的模型，测试Alexnet模型对CIFAR-100数据集的分类效果，在此基础上与使用cutout, mixup, cutmix这几种数据增强方法下的数据集训练效果进行了对比。
+使用说明如下：
+**1.git clone cifar100-aug/cifar100-baseline**
+**2.训练模型 python main.py **
+注明：模型的训练过程中的相关参数会记录在相对路径的log文件夹中，可使用tensorboard可视化，图片的可视化文件见数据探索与可视化notebook文件。
 
 ## Faster R-CNN
 
