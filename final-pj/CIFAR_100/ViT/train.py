@@ -92,7 +92,7 @@ def run():
         val_acc, val_loss = engine.eval_fn(model, val_loader, device)
         writer.add_scalar('Train/loss', train_loss, epoch) 
         writer.add_scalar('Train/acc', train_acc, epoch) 
-        writer.add_scalar('Train/loss', val_loss, epoch) 
+        writer.add_scalar('Test/loss', val_loss, epoch) 
         writer.add_scalar('Test/acc', val_acc, (epoch)) 
         print(f'\nEPOCH     =  {epoch+1} / {config.Epochs} | LR =  {scheduler.get_last_lr()[0]}')
         print(f'TRAIN ACC = {train_acc*100}% | TRAIN LOSS = {train_loss}')

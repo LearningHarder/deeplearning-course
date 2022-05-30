@@ -157,14 +157,14 @@ class ViT(nn.Module):
 if __name__ == "__main__":
 
     model = ViT(
-        patch_height = 16,
-        patch_width = 16,
-        embedding_dims = 768,
+        patch_height = 8,
+        patch_width = 8,
+        embedding_dims = 192,
         dropout = 0.1,
         heads = 4,
         num_layers = 4,
         forward_expansion = 4,
-        max_len = int((32*32)/(16*16)),
+        max_len = int((32*32)/(8*8)),
         layer_norm_eps = 1e-5,
         num_classes = 100,
     )
