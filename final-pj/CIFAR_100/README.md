@@ -5,16 +5,17 @@ In this part, we implement a model based on the structure of Vision Transformer,
 #### Vision Transformer
 1) Git Clone the Repository and go to the corresponding file folder.
 ```!git clone https://github.com/LearningHarder/deeplearning-course.git```
-```!cd final-pj/ViT```
 2) Install all the libraries required.
-```pip install -r ViT/requirements``` 
+```pip install -r requirements.txt``` 
+Notes: It is possible that colab can't install albumentation in the requirements.txt. If so, please delete albumentation in the requirement.txt and use pip to install directly.
+```pip install albumentations``` 
 3) Train the ViT from scratch.
 ```python3 train.py```
 4) Give Predictions if need. 
  ```python3 predict.py``` .
 5) Plot Accuracy and Loss through epoches. 
  ```!``` .
-Notes: It is possible that colab can't install albumentation in the requirements.txt. If so, please delete albumentation in the requirement.txt and use pip to install directly.
+
  ```!pip install albumentations ```
 
  

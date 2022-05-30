@@ -118,7 +118,7 @@ class ViT(nn.Module):
         self.patch_width = patch_width
         self.cls_embedding = nn.Parameter(torch.zeros(1, 1, embedding_dims))
         self.patch_embeddings = nn.Linear(embedding_dims, embedding_dims)
-        self.postional_embedding = nn.Parameter(torch.zeros(1, max_len+1, embedding_dims))
+        self.postional_embedding = nn.Parameter(torch.zeros(1, max_len, embedding_dims))
         self.to_cls_token = nn.Identity()
         self.classifier = nn.Sequential(
             nn.LayerNorm(embedding_dims),
