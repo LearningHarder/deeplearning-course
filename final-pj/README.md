@@ -1,22 +1,20 @@
 # Final Project
-在这个文件中包含了两个文件夹Fast-R-CNN和CIFAR100，分别对应了期末项目中的2和3两个任务，使用方法如下所示。
+In this folder, we have 'Faster_R-CNN' for the second task and 'CIFAR-100' for the third task in final project.
 ## Table of Contents
 - [Faster R-CNN](#Faster_R-CNN)
-- [CIFAR-100](#Transformer: CIFAR-100)
+- [Transformer on CIFAR-100](#Transformer_on_CIFAR-100)
 
 ## Faster_R-CNN
 ### a) 随机初始化训练VOC
 ```
-pip install requirement.txt
+type in your code, if necessary....
 ```
 ### b) ImageNet预训练backbone网络并使用VOC进行fine tune
 ### c) 使用coco训练的Mask R-CNN的backbone网络参数，初始化Faster R-CNN的backbone网络，然后使用VOC进行fine tune
 
-## Transformer: CIFAR-100
-在CIFAR-100文件夹中包含着Alexnet文件夹和ViT文件夹，分别对应着在参数量为22.64M下两个模型对CIFAR-100数据集的训练框架。使用方法请阅读CIFAR-100文件夹的README.
-### a) 网络模型设置
+## Transformer_on_CIFAR-100
+There are two folders 'Alexnet' & 'ViT' in 'CIFAR-100, containing models with about 11.06M total parameters respectively, please read README.md for specific usage and quick start with Google colab.
 
-### b) 模型任务比较
 
 
 
