@@ -13,7 +13,9 @@ pip install requirement.txt
 ### c) 使用coco训练的Mask R-CNN的backbone网络参数，初始化Faster R-CNN的backbone网络，然后使用VOC进行fine tune
 
 ## Transformer: CIFAR-100
+在CIFAR-100文件夹中包含着Alexnet文件夹和ViT文件夹，分别对应着在参数量为22.64M下两个模型对CIFAR-100数据集的训练框架。使用方法请阅读CIFAR-100文件夹的README.
 ### a) 网络模型设置
+
 ### b) 模型任务比较
 
 
