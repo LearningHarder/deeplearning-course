@@ -4,7 +4,7 @@ image_path = 'input/'
 Model_Path = 'model/model.bin'
 
 Batch_Size = 64
-Epochs = 200
+Epochs = 120
 LR = 8e-4
 weight_decay = 0.1
 
@@ -16,7 +16,7 @@ patch_size = 8
 embedding_dims = patch_size*patch_size*3
 dropout = 0.1
 heads = 4
-num_layers = 32
+num_layers = 8
 forward_expansion = 4
 max_len = math.ceil(image_height*image_width/patch_size**2) + 1
 layer_norm_eps = 1e-5
