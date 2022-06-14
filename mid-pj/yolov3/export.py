@@ -128,6 +128,7 @@ def export_coreml(model, im, file, prefix=colorstr('CoreML:')):
         LOGGER.info(f'\n{prefix} export failure: {e}')
 
     return ct_model
+   
 
 
 def export_saved_model(model, im, file, dynamic,
