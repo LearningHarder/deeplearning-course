@@ -5,4 +5,4 @@
 !wget https://download.openmmlab.com/mmsegmentation/v0.5/deeplabv3plus/deeplabv3plus_r18-d8_512x1024_80k_cityscapes/deeplabv3plus_r18-d8_512x1024_80k_cityscapes_20201226_080942-cff257fe.pth
 ```
 
-![image]((https://github.com/LearningHarder/deeplearning-course/master/final-pj/SemanticSegmentation/testimg.jpg))
+![image](https://github.com/LearningHarder/deeplearning-course/blob/master/final-pj/SemanticSegmentation/testimg.jpg)
