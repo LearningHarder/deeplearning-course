@@ -1,36 +1,8 @@
-# Vision-Transformer On CIFAR-100
-In this part, we implement a model based on the structure of Vision Transformer, and compare the accuracy with Alexnet with similar parameters size. And we try several data augmentation method to compare with the baseline of both Convolutionary Neural Networks model and Transformer model.
+# Semantic Segmentation on AD video
+我们使用开源的github项目 https://github.com/open-mmlab/mmsegmentation.git ，在colab环境进行实验
+使用的模型为DeepLabV3+ ，载入在cityscapes数据集上训练所得的权重，测试的视频为b站up主\textbf{柠檬气泡水Nicole}2022年5月30日上传的约2分钟的\href{https://www.bilibili.com/video/BV1v94y1S7so?spm_id_from=333.337.search-card.all.click}{行车视频素材}
+```
+!wget https://download.openmmlab.com/mmsegmentation/v0.5/deeplabv3plus/deeplabv3plus_r18-d8_512x1024_80k_cityscapes/deeplabv3plus_r18-d8_512x1024_80k_cityscapes_20201226_080942-cff257fe.pth
+```
 
-## Quick Usage with Google Colab
-#### Vision Transformer & Alexnet
-1) Git Clone the Repository and go to the corresponding file folder.
-```!git clone https://github.com/LearningHarder/deeplearning-course.git```
-2) Install all the libraries required.
-```!pip install -r requirements.txt``` 
-3) Train the ViT from scratch.
-```python train.py```
-4) Plot Accuracy and Loss through epoches with TensorBoard
- ```%load_ext tensorboard```
-```%tensorboard --logdir log``` .
-
- 
-## Results 
-
-The ViT took about __ minutes to train on CIFAR-100 dataset. Without any prior pre-training we were able to achieve about 74% accuracy on validation dataset.
-
-
-## Model  Info 
-<pre>
-Alexnet v.s. ViT
-1) Numbers of Parameters:  : 2.88M 
-1) Training Stratergy      : Training the whole network from scratch.
-2) Optimizer               : Adam optimizer with weight decay.
-3) Learning Rate Scheduler : Linear decay with warmup.
-4) Regularization          : Dropout, HorizontalFlip, RandomBrightness, RandomContrast, RGBShift, GaussNoise
-5) Loss                    : Categorical Cross-Entropy Loss.
-6) Performance Metric      : Accuracy.
-7) Performance             : % Accuracy v.s.
-7) Epochs Trained          : 80
-8) Training Time           : 12 minutes
-</pre>
 
