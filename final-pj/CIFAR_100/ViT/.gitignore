@@ -1,0 +1,7 @@
+*.csv
+*.pickle
+__pycache__
+*.meta
+*.html
+data_batch*
+test_batch
