@@ -1,6 +1,0 @@
-numpy
-Pillow
-tqdm
-albumentations
-transformers
-torch
