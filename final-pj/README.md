@@ -1,9 +1,11 @@
 # Final Project
 In this folder, we have 'Faster_R-CNN' for the second task and 'CIFAR-100' for the third task in final project.
 ## Table of Contents
+- [Semantic Segmentation](#Semantic_Segmentation)
 - [Faster R-CNN](#Faster_R-CNN)
 - [Transformer on CIFAR-100](#Transformer_on_CIFAR-100)
-
+## Semantic_Segmentation
+基于开源仓库https://github.com/open-mmlab/mmsegmentation.git ，细节见文件夹中的readme文件
 ## Faster_R-CNN
 ### a) 随机初始化训练VOC
 ```
