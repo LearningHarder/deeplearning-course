@@ -7,6 +7,7 @@ In this folder, we have 'Faster_R-CNN' for the second task and 'CIFAR-100' for t
 ## Semantic_Segmentation
 基于开源仓库https://github.com/open-mmlab/mmsegmentation.git ，细节见文件夹中的readme文件
 ## Faster_R-CNN
+主要分为以下三部分，细节间文件夹中的readme文件
 ### a) 随机初始化训练VOC
 ### b) ImageNet预训练backbone网络并使用VOC进行fine tune
 ### c) 使用coco训练的Mask R-CNN的backbone网络参数，初始化Faster R-CNN的backbone网络，然后使用VOC进行fine tune
