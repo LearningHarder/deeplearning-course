@@ -29,8 +29,8 @@
 
 ## 预训练权重下载地址（下载后放入backbone文件夹中）：
 * ResNet50 backbone:  https://download.pytorch.org/models/resnet50-0676ba61.pth
+* coco+mask rcnn训练得backbone权重: https://pan.baidu.com/s/1qpXUIsvnj8RHY-V05J-mnA  密码: 63d5
 * 注意，下载的预训练权重记得要重命名，比如在 train_multi_GPU_imagenet.py中读取的是`resnet50.pth`文件，
- 
  
  
 ## 数据集，本例程使用的是PASCAL VOC2007数据集
@@ -64,7 +64,9 @@ python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU
 python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU_imagenet.py --epochs 40 --lr 0.01 -b 6
 ```
 * coco+mask_rcnn初始化
-
+```
+!python train_res50_fpn_mask.py --epoch=25 --batch_size=5
+```
 
 * `CUDA_VISIBLE_DEVICES=0,3 python -m torch.distributed.launch --nproc_per_node=2 --use_env train_multi_GPU.py`
 
