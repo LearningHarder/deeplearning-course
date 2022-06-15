@@ -56,13 +56,13 @@
 !wget -c "https://download.pytorch.org/models/resnet50-0676ba61.pth" -O ./backbone/resnet50.pth
 ```
 * 随机初始化训练
-、、、
+```
 python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU_random.py --epochs 70 --lr 0.02 -b 6
-、、、
+```
 * imageNet初始化
-、、、
-python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU_imagenet.py --epochs 40 --lr 0.01 -b 6
-、、、
+```
+python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU_imageNet.py --epochs 40 --lr 0.01 -b 6
+```
 * coco+mask_rcnn初始化
 
 
