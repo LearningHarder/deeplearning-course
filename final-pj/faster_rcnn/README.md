@@ -65,10 +65,10 @@ python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU
 ```
 * coco+mask_rcnn初始化
 ```
-!python train_res50_fpn_mask.py --epoch=25 --batch_size=5
+!python train_res50_fpn.py  --data-path=data_dir --epoch=25 --batch_size=5
 ```
 
 * `CUDA_VISIBLE_DEVICES=0,3 python -m torch.distributed.launch --nproc_per_node=2 --use_env train_multi_GPU.py`
 
 ## 注意事项
-
+* 注意，在使用不同初始化方法时需检查训练程序中预训练权重路径是否一致。
