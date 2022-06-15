@@ -1,5 +1,12 @@
-## python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU_random.py --epochs 40 --lr 0.01
+## python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU_random.py --epochs 60 --lr 0.01 -b 6
 
+# python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU_random.py --epochs 60 --lr 0.01 -b 6
+# 615 05:24
+# python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU_random.py --epochs 40 --lr 0.02 -b 6
+# 使用 random
+# 6151237 权重衰减2次 gamma 0.4
+# python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU_random.py --epochs 40 --lr 0.02 -b 6
+# 使用 random
 import time
 import os
 import datetime
@@ -13,7 +20,7 @@ from network_files import FasterRCNN, FastRCNNPredictor
 import train_utils.train_eval_utils as utils
 from train_utils import GroupedBatchSampler, create_aspect_ratio_groups, init_distributed_mode, save_on_master, mkdir
 
-
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1" 
 def create_model(num_classes):
     # 如果显存很小，建议使用默认的FrozenBatchNorm2d
     # trainable_layers包括['layer4', 'layer3', 'layer2', 'layer1', 'conv1']， 5代表全部训练
@@ -50,7 +57,7 @@ def main(args):
 
     # 用来保存coco_info的文件
     res_dir = 'results/'
-    results_file = res_dir+"random_results{}.txt".format(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+    results_file = res_dir+"randomInitlr0.02_results{}.txt".format(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
     if not os.path.exists(res_dir):
         os.makedirs(res_dir)
     # results_file = "results{}.txt".format(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
@@ -147,10 +154,13 @@ def main(args):
     train_loss = []
     learning_rate = []
     val_map = []
+    val_loss = []
 
     print("Start training")
     start_time = time.time()
     for epoch in range(args.start_epoch, args.epochs):
+        # tloss = utils.test_one_epoch(model, data_loader_test,
+        #                                       device,epoch, args.print_freq, scaler=scaler)
         if args.distributed:
             train_sampler.set_epoch(epoch)
         mean_loss, lr = utils.train_one_epoch(model, optimizer, data_loader,
@@ -158,24 +168,26 @@ def main(args):
                                               warmup=True, scaler=scaler)
         train_loss.append(mean_loss.item())
         learning_rate.append(lr)
+        
 
         # update learning rate
         lr_scheduler.step()
-
+        tloss = utils.test_one_epoch(model, data_loader_test,
+                                              device,epoch, args.print_freq, scaler=scaler)
         # evaluate after every epoch
         coco_info = utils.evaluate(model, data_loader_test, device=device)
         val_map.append(coco_info[1])  # pascal mAP
-
+        val_loss.append(tloss.item())
         # 只在主进程上进行写操作
         if args.rank in [-1, 0]:
             # write into txt
             with open(results_file, "a") as f:
                 # 写入的数据包括coco指标还有loss和learning rate
-                result_info = [f"{i:.4f}" for i in coco_info + [mean_loss.item()]] + [f"{lr:.6f}"]
+                result_info = [f"{i:.4f}" for i in coco_info + [mean_loss.item()]+[tloss.item()]] + [f"{lr:.6f}"]
                 txt = "epoch:{} {}".format(epoch, '  '.join(result_info))
                 f.write(txt + "\n")
 
-        if args.output_dir:
+        if args.output_dir and (epoch+1) % 10 ==0:
             # 只在主节点上执行保存权重操作
             save_files = {
                 'model': model_without_ddp.state_dict(),
@@ -186,7 +198,7 @@ def main(args):
             if args.amp:
                 save_files["scaler"] = scaler.state_dict()
             save_on_master(save_files,
-                           os.path.join(args.output_dir, f'randomInit_model_{epoch}.pth'))
+                           os.path.join(args.output_dir, f'randomInitlr0.01_gpu2_gamma0.04_model_{epoch}.pth'))
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
@@ -239,13 +251,13 @@ if __name__ == "__main__":
                         metavar='W', help='weight decay (default: 1e-4)',
                         dest='weight_decay')
     # 针对torch.optim.lr_scheduler.StepLR的参数
-    parser.add_argument('--lr-step-size', default=8, type=int, help='decrease lr every step-size epochs')
+    parser.add_argument('--lr-step-size', default=5, type=int, help='decrease lr every step-size epochs')
     # 针对torch.optim.lr_scheduler.MultiStepLR的参数
-    parser.add_argument('--lr-steps', default=[7, 12], nargs='+', type=int, help='decrease lr every step-size epochs')
+    parser.add_argument('--lr-steps', default=[5, 10,24], nargs='+', type=int, help='decrease lr every step-size epochs')
     # 针对torch.optim.lr_scheduler.MultiStepLR的参数
-    parser.add_argument('--lr-gamma', default=0.1, type=float, help='decrease lr by a factor of lr-gamma')
+    parser.add_argument('--lr-gamma', default=0.4, type=float, help='decrease lr by a factor of lr-gamma')
     # 训练过程打印信息的频率
-    parser.add_argument('--print-freq', default=20, type=int, help='print frequency')
+    parser.add_argument('--print-freq', default=400, type=int, help='print frequency')
     # 文件保存地址
     parser.add_argument('--output-dir', default='./multi_train', help='path where to save')
     # 基于上次的训练结果接着训练

@@ -1,4 +1,4 @@
-## python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU.py --epochs 30 --lr 0.01
+## python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU.py --epochs 30 --lr 0.01 -b 6
 ## 使用imageNet预训练
 import time
 import os
