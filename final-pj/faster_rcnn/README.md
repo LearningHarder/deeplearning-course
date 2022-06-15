@@ -61,7 +61,7 @@ python -m torch.distributed.launch --nproc_per_node=2  --use_env train_multi_GPU
 ```
 * imageNet初始化
 ```
-python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU_imageNet.py --epochs 40 --lr 0.01 -b 6
+python -m torch.distributed.launch --nproc_per_node=1  --use_env train_multi_GPU_imagenet.py --epochs 40 --lr 0.01 -b 6
 ```
 * coco+mask_rcnn初始化
 
